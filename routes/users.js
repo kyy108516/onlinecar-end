@@ -9,10 +9,7 @@ var pool=mysql.createPool(dbConfig.mysql);
 //响应json数据
 var responseJSON=function(res,ret){
   if (typeof ret==="undefined"){
-    res.json({
-      code:'-200',
-      msg:'操作失败'
-    });
+    res.send('err')
   } else{
       res.json(ret)
     }
@@ -25,20 +22,67 @@ router.get('/addUser', function(req, res, next) {
    //获取前台页面传过来的参数
    var param=req.query||req.params;
    //建立连接 增加一个用户信息
-   connection.query(userSQL.insert, [param.user_id,param.user_password], function(err, result) {
-     if(result) {
-       result = {
-         code: 200,
-         msg:'增加成功'
-       };
-     }
-     // 以json形式，把操作结果返回给前台页面
-     responseJSON(res, result);
+             connection.query(userSQL.insert, [param.user_id,param.user_password], function(err, result) {
+                 if(result) {
+                     result={
+                         code:200,
+                         msg:'增加成功'
+                     }
+                 }
+                 // 以json形式，把操作结果返回给前台页面
+                 responseJSON(res, result);
+             });
+
+
      // 释放连接
      connection.release();
-   });
  })
 });
 
+router.get('/getUser', function(req, res, next) {
+  //从连接池获取连接
+  pool.getConnection(function (err,connection) {
+    var param=req.query||req.params;
+    //建立连接 查找一个用户信息
+   connection.query(userSQL.queryAll,function (err,result,rese) {
+       var isTrue=false;
+       var psTrue=false
+       if (result){
+           for (let i=0;i<result.length;i++){
+               if (result[i].user_id===param.user_id && result[i].user_password===param.user_password){
+                   isTrue=true;
+                   psTrue=true;
+               } else if(result[i].user_id===param.user_id && result[i].user_password!==param.user_password){
+                   isTrue=true;
+                   psTrue=false;
+               }
+           }
+       }
+       if (isTrue){
+           if (psTrue){
+               if (rese){
+                   rese={
+                       msg:'登录成功'
+                   }
+               }
+           }else if (isTrue && !psTrue) {
+               if (rese){
+                   rese={
+                       msg:'密码错误'
+                   }
+               }
+           }
+       }else{
+           if (rese){
+               rese={
+                   msg:'用户不存在'
+               }
+           }
+       }
+       responseJSON(res,rese)
+   })
+      connection.release();
+  })
+});
 
 module.exports = router;
