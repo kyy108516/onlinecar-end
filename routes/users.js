@@ -49,10 +49,10 @@ router.get('/getUser', function(req, res, next) {
        var psTrue=false
        if (result){
            for (let i=0;i<result.length;i++){
-               if (result[i].user_id===param.user_id && result[i].user_password===param.user_password){
+               if (result[i].username===param.username && result[i].password===param.password){
                    isTrue=true;
                    psTrue=true;
-               } else if(result[i].user_id===param.user_id && result[i].user_password!==param.user_password){
+               } else if(result[i].username===param.username && result[i].password!==param.password){
                    isTrue=true;
                    psTrue=false;
                }
