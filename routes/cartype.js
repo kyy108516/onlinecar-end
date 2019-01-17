@@ -12,4 +12,10 @@ router.get('/deleteCartype',function (req,res,next) {
 router.get('/addCartype',function (req,res,next) {
     cartype.add(req,res,next)
 });
+router.get('/selectCartype',function (req,res,next) {
+    cartype.queryById(req,res,next)
+});
+router.get('/updateCartype',function (req,res,next) {
+    cartype.queryById(req,res,next)
+});
 module.exports = router;
