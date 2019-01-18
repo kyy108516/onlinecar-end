@@ -16,6 +16,6 @@ router.get('/selectCartype',function (req,res,next) {
     cartype.queryById(req,res,next)
 });
 router.get('/updateCartype',function (req,res,next) {
-    cartype.queryById(req,res,next)
+    cartype.update(req,res,next)
 });
 module.exports = router;

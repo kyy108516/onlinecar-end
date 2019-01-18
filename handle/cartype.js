@@ -51,7 +51,7 @@ var cartypeData = {
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
             var param = req.query || req.params;
-            connection.query(cartypeSQL.add, param.brand, function (err, result) {
+            connection.query(cartypeSQL.add, [param.brand,param.model,param.type], function (err, result) {
                 if (result) {
                     result = 'add'
                 } else {
@@ -85,7 +85,7 @@ var cartypeData = {
             connection.release();
         })
     },
-    queryById: function (req, res, next) {
+    update: function (req, res, next) {
         var param = req.query || req.params;
         if (param.brand == null || param.id == null) {
             json(res, undefined);
@@ -94,7 +94,7 @@ var cartypeData = {
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
             var param = req.query || req.params;
-            connection.query(cartypeSQL.update, [param.brand,param.id], function (err, result) {
+            connection.query(cartypeSQL.update, [param.brand,param.model,param.type,param.id], function (err, result) {
                 if (result.affectedRows>0) {
                     var _result = result;
                     result ='update'
