@@ -1,5 +1,5 @@
 var CarTypeSQL = {
-    queryAll: "select * from car_type",
+    queryAll: "select * from car_type where 1=1",
     delete:"delete from car_type where id=?",
     add:"insert into car_type(brand,model,type) values(?,?,?)",
     queryById:"select * from car_type where id=?",

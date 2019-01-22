@@ -30,6 +30,42 @@ var cartypeData = {
             connection.release();
         })
     },
+    query: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //建立连接 得到车辆表
+            var data=req.body
+            var sql=cartypeSQL.queryAll
+            if (data.id!=''){
+                sql+=' and id='+data.id
+            }
+            if(data.brand !=''){
+                sql+=" and brand="+"'"+data.brand+"'"
+            }
+
+            if(data.model!=''){
+                sql+=" and model="+"'"+data.model+"'"
+            }
+            if(data.type!=''){
+                sql+=" and type="+"'"+data.type+"'"
+            }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'selectall',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
     delete: function (req, res, next) {
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数

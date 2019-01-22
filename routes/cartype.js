@@ -6,6 +6,9 @@ var cartype=require('../handle/cartype')
 router.get('/queryAll', function(req, res, next) {
     cartype.queryAll(req,res,next);
 });
+router.post('/query', function(req, res, next) {
+    cartype.query(req,res,next);
+});
 router.get('/deleteCartype',function (req,res,next) {
     cartype.delete(req,res,next)
 });
