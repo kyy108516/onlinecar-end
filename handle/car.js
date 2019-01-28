@@ -13,7 +13,7 @@ var carData={
     queryAll:function (req,res,next) {
         pool.getConnection(function (err,connection) {
             //建立连接 得到车辆表
-            connection.query(carSQL.queryAll, function(err, result) {
+            connection.query(carSQL.query, function(err, result) {
                 if(result!='') {
                     var _result=result;
                     result={
