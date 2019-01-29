@@ -10,21 +10,37 @@ var carSQL=require('../db/carsql');
 var json = require('../json/car');
 
 var carData={
-    queryAll:function (req,res,next) {
-        pool.getConnection(function (err,connection) {
+    query: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
             //建立连接 得到车辆表
-            connection.query(carSQL.query, function(err, result) {
-                if(result!='') {
-                    var _result=result;
-                    result={
-                        result:'selectall',
-                        data:_result
+            var data=req.body
+            var sql=carSQL.query
+            if (data.license!=''){
+                sql+=" and license="+"'"+data.license+"'"
+            }
+            if(data.vin !=''){
+                sql+=" and vin="+"'"+data.vin+"'"
+            }
+
+            if(data.model!=''){
+                sql+=" and model="+"'"+data.model+"'"
+            }
+            if(data.state!=''){
+                sql+=" and state="+"'"+data.state+"'"
+            }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
                     }
-                }else{
-                    result=undefined;
+                } else {
+                    result = undefined;
                 }
                 // 以json形式，把操作结果返回给前台页面
-                json(res,result);
+                json(res, result);
             });
             // 释放连接
             connection.release();
