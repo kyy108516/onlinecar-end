@@ -15,13 +15,18 @@ var carData={
             //建立连接 得到车辆表
             var data=req.body
             var sql=carSQL.query
+            if (data.id!=0){
+                sql+=" and a.id="+data.id
+            }else if (data.id==="0"){
+                json(res,undefined)
+                return
+            }
             if (data.license!=''){
                 sql+=" and license="+"'"+data.license+"'"
             }
             if(data.vin !=''){
                 sql+=" and vin="+"'"+data.vin+"'"
             }
-
             if(data.model!=''){
                 sql+=" and model="+"'"+data.model+"'"
             }
@@ -62,7 +67,47 @@ var carData={
             // 释放连接
             connection.release();
         })
-    }
+    },
+    add: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(carSQL.add, [param.license,param.vin,param.cartype], function (err, result) {
+                if (result) {
+                    result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    update: function (req, res, next) {
+        var param = req.query || req.params;
+        if (param.license == null || param.id == null) {
+            json(res, undefined);
+            return;
+        }
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(carSQL.update, [param.license,param.vin,param.cartype,param.id], function (err, result) {
+                if (result.affectedRows>0) {
+                    var _result = result;
+                    result ='update'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
 }
 
 module.exports=carData
