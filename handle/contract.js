@@ -66,7 +66,24 @@ var contractData={
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
             var param = req.query || req.params;
-            connection.query(contractSQL.add, [param.license,param.vin,param.cartype], function (err, result) {
+            connection.query(contractSQL.add, [param.id,param.type,param.car_id,param.driver_id,param.start_time,param.end_time], function (err, result) {
+                if (result) {
+                    result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    additem: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(contractSQL.additem, [param.type,param.type,param.period,param.money,param.time], function (err, result) {
                 if (result) {
                     result = 'add'
                 } else {

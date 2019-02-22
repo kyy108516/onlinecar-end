@@ -12,6 +12,9 @@ router.get('/deleteContract',function (req,res,next) {
 router.get('/addContract',function (req,res,next) {
     contract.add(req,res,next)
 });
+router.get('/addContractItem',function (req,res,next) {
+    contract.additem(req,res,next)
+});
 router.get('/updateContract',function (req,res,next) {
     contract.update(req,res,next)
 })
