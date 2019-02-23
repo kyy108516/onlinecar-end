@@ -14,5 +14,8 @@ router.get('/addDriver',function (req,res,next) {
 });
 router.get('/updateDriver',function (req,res,next) {
     driver.update(req,res,next)
+});
+router.get('/updateState',function (req,res,next) {
+    driver.updatestate(req,res,next)
 })
 module.exports = router;

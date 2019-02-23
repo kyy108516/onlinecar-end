@@ -12,7 +12,6 @@ var json = require('../json/car');
 var driverData={
     query: function (req, res, next) {
         pool.getConnection(function (err, connection) {
-            //建立连接 得到车辆表
             var data=req.body
             var sql=driverSQL.query
             if (data.id!=0){
@@ -29,6 +28,9 @@ var driverData={
             }
             if(data.phone!=''){
                 sql+=" and phone="+"'"+data.phone+"'"
+            }
+            if(data.state!=''){
+                sql+=" and state="+"'"+data.state+"'"
             }
             console.log(sql)
             connection.query(sql, function (err, result) {
@@ -92,6 +94,25 @@ var driverData={
             //获取前台页面传过来的参数
             var param = req.query || req.params;
             connection.query(driverSQL.update, [param.name,param.sex,param.phone,param.id], function (err, result) {
+                if (result.affectedRows>0) {
+                    var _result = result;
+                    result ='update'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    updatestate: function (req, res, next) {
+        var param = req.query || req.params;
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(driverSQL.updatestate, [param.state,param.id], function (err, result) {
                 if (result.affectedRows>0) {
                     var _result = result;
                     result ='update'

@@ -3,5 +3,6 @@ var CarSQL = {
     delete:"delete from car_list where id=?",
     add:"insert into car_list(license,vin,cartype,state) values(?,?,?,'库存')",
     update:"update car_list set license=?,vin=?,cartype=? where id=?",
+    updatestate:"update car_list set state=? where id=?"
 };
 module.exports = CarSQL;

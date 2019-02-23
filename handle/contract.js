@@ -66,6 +66,7 @@ var contractData={
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
             var param = req.query || req.params;
+            console.log(param.start_time)
             connection.query(contractSQL.add, [param.id,param.type,param.car_id,param.driver_id,param.start_time,param.end_time], function (err, result) {
                 if (result) {
                     result = 'add'
@@ -83,7 +84,7 @@ var contractData={
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
             var param = req.query || req.params;
-            connection.query(contractSQL.additem, [param.type,param.type,param.period,param.money,param.time], function (err, result) {
+            connection.query(contractSQL.additem, [param.id,param.type,param.period,param.money,param.time], function (err, result) {
                 if (result) {
                     result = 'add'
                 } else {
