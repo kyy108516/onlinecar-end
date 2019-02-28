@@ -9,6 +9,9 @@ router.post('/query', function(req, res, next) {
 router.get('/deleteCar',function (req,res,next) {
     car.delete(req,res,next)
 });
+router.get('/deletePartner',function (req,res,next) {
+    car.deletepartner(req,res,next)
+});
 router.get('/addCar',function (req,res,next) {
     car.add(req,res,next)
 });
@@ -26,5 +29,14 @@ router.get('/queryPartner',function (req,res,next) {
 });
 router.get('/addInsurance',function (req,res,next) {
     car.addinsurance(req,res,next)
+});
+router.post('/Partner',function (req,res,next) {
+    car.partner(req,res,next)
+});
+router.get('/addPartner',function (req,res,next) {
+    car.addpartner(req,res,next)
+});
+router.get('/updatePartner',function (req,res,next) {
+    car.updatepartner(req,res,next)
 });
 module.exports = router;

@@ -11,6 +11,7 @@ var cartypeRoute=require('./routes/cartype');
 var driverRoute=require('./routes/driver')
 var contractRoute=require('./routes/contract')
 var validateRoute=require('./routes/validate')
+var maintainanceRoute=require('./routes/maintainance')
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/cartype',cartypeRoute);
 app.use('/driver',driverRoute);
 app.use('/contract',contractRoute);
 app.use('/validate',validateRoute);
+app.use('/maintainance',maintainanceRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
