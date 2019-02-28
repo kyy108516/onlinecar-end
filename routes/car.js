@@ -14,8 +14,17 @@ router.get('/addCar',function (req,res,next) {
 });
 router.get('/updateCar',function (req,res,next) {
     car.update(req,res,next)
-})
+});
 router.get('/updateState',function (req,res,next) {
     car.updatestate(req,res,next)
-})
+});
+router.get('/queryInsurance',function (req,res,next) {
+    car.queryinsurance(req,res,next)
+});
+router.get('/queryPartner',function (req,res,next) {
+    car.querypartner(req,res,next)
+});
+router.get('/addInsurance',function (req,res,next) {
+    car.addinsurance(req,res,next)
+});
 module.exports = router;

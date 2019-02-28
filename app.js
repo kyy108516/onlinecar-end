@@ -43,7 +43,7 @@ app.use('/car',carRoute);
 app.use('/cartype',cartypeRoute);
 app.use('/driver',driverRoute);
 app.use('/contract',contractRoute);
-app.use('/validate',validateRoute),
+app.use('/validate',validateRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
