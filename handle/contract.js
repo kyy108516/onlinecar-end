@@ -27,6 +27,9 @@ var contractData={
             if(data.name!=''){
                 sql+=" and a.driver_id="+"'"+data.name+"'"
             }
+            if(data.state!=''){
+                sql+=" and a.state="+"'"+data.state+"'"
+            }
             console.log(sql)
             connection.query(sql, function (err, result) {
                 if (result != '') {

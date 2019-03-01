@@ -6,4 +6,7 @@ var maintainance=require('../handle/maintainance')
 router.post('/query', function(req, res, next) {
     maintainance.query(req,res,next);
 });
+router.get('/addMaintainance',function (req,res,next) {
+    maintainance.add(req,res,next)
+});
 module.exports = router;
