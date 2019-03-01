@@ -277,6 +277,46 @@ var carData={
             connection.release();
         })
     },
+    queryviolation: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //建立连接 得到车辆表
+            var data=req.body
+            // var sql=carSQL.queryviolation
+            // if (data.id!=0){
+            //     sql+=" and a.id="+data.id
+            // }else if (data.id==="0"){
+            //     json(res,undefined)
+            //     return
+            // }
+            // if (data.license!=''){
+            //     sql+=" and license="+"'"+data.license+"'"
+            // }
+            // if(data.vin !=''){
+            //     sql+=" and vin="+"'"+data.vin+"'"
+            // }
+            // if(data.model!=''){
+            //     sql+=" and model="+"'"+data.model+"'"
+            // }
+            // if(data.state!=''){
+            //     sql+=" and state="+"'"+data.state+"'"
+            // }
+            connection.query(carSQL.queryviolation, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
 }
 
 module.exports=carData

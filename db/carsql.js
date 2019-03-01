@@ -11,6 +11,6 @@ var CarSQL = {
     deletepartner:"delete from sys_partner where id=?",
     addpartner:"insert into sys_partner(company_name,type) values(?,?)",
     updatepartner:"update sys_partner set company_name=?,type=? where id=?",
-
+    queryviolation:"select a.*,b.license,c.name from car_violation as a,car_list as b,driver_list as c where a.car_id=b.id and a.driver_id=c.id",
 };
 module.exports = CarSQL;
