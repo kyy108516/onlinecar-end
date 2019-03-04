@@ -31,7 +31,7 @@ var carData={
                 sql+=" and model="+"'"+data.model+"'"
             }
             if(data.state!=''){
-                sql+=" and state="+"'"+data.state+"'"
+                sql+=" and a.state="+"'"+data.state+"'"
             }
             console.log(sql)
             connection.query(sql, function (err, result) {
