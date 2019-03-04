@@ -35,11 +35,11 @@ var cartypeData = {
             //建立连接 得到车辆表
             var data=req.body
             var sql=cartypeSQL.queryAll
-            if (data.id!=''){
+            if (data.id !=''){
                 sql+=' and id='+data.id
             }
             if(data.brand !=''){
-                sql+=" and brand="+"'"+data.brand+"'"
+                sql+=" and brand LIKE"+"'%"+data.brand+"%'"
             }
 
             if(data.model!=''){
@@ -70,9 +70,10 @@ var cartypeData = {
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
             var param = req.query || req.params;
-            connection.query(cartypeSQL.delete, param.id, function (err, result) {
-                if (result.affectedRows > 0) {//mysql执行影响的行数大于0
-                    result = 'delete'
+            connection.query(cartypeSQL.delete, [param.id], function (err, result) {
+                if (result.affectedRows>0) {
+                    var _result = result;
+                    result ='update'
                 } else {
                     result = undefined;
                 }
