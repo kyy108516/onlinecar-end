@@ -15,7 +15,7 @@ router.post('/queryBill', function(req, res, next) {
 router.post('/queryDeatil', function(req, res, next) {
     account.querydetail(req,res,next);
 });
-// router.get('/addMaintainance',function (req,res,next) {
-//     accident.add(req,res,next)
-// });
+router.get('/addReceivable',function (req,res,next) {
+    account.addreceivable(req,res,next)
+});
 module.exports = router;

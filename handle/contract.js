@@ -100,19 +100,43 @@ var contractData={
             connection.release();
         })
     },
-    update: function (req, res, next) {
-        var param = req.query || req.params;
-        if (param.license == null || param.id == null) {
-            json(res, undefined);
-            return;
-        }
+    updatestate: function (req, res, next) {
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
             var param = req.query || req.params;
-            connection.query(contractSQL.update, [param.license,param.vin,param.cartype,param.id], function (err, result) {
+            connection.query(contractSQL.updatestate, [param.state,param.id], function (err, result) {
                 if (result.affectedRows>0) {
                     var _result = result;
                     result ='update'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    queryitem: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //建立连接 得到合同表
+            var data=req.body
+            var sql=contractSQL.queryitem
+            if (data.id!=''){
+                sql+=" and a.id="+"'"+data.id+"'"
+            }
+            // if(data.state!=''){
+            //     sql+=" and a.state="+"'"+data.state+"'"
+            // }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
                 } else {
                     result = undefined;
                 }

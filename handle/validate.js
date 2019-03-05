@@ -48,24 +48,15 @@ var validateData={
         pool.getConnection(function (err, connection) {
             var data=req.body
             var sql=validateSQL.query
-            // if (data.id!=0){
-            //     sql+=" and id="+data.id
-            // }else if (data.id==="0"){
-            //     json(res,undefined)
-            //     return
-            // }
+            if (data.id!=0){
+                sql+=" and a.id="+data.id
+            }else if (data.id==="0"){
+                json(res,undefined)
+                return
+            }
             if (data.state!=''){
                 sql+=" and a.state="+"'"+data.state+"'"
             }
-            // if(data.sex !=''){
-            //     sql+=" and sex="+"'"+data.sex+"'"
-            // }
-            // if(data.phone!=''){
-            //     sql+=" and phone like"+"'%"+data.phone+"%'"
-            // }
-            // if(data.state!=''){
-            //     sql+=" and state="+"'"+data.state+"'"
-            // }
             console.log(sql)
             connection.query(sql, function (err, result) {
                 if (result != '') {
@@ -74,6 +65,24 @@ var validateData={
                         result: 'select',
                         data: _result
                     }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    updatestate: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(validateSQL.updatestate, [param.state,param.id], function (err, result) {
+                if (result.affectedRows>0) {
+                    var _result = result;
+                    result ='update'
                 } else {
                     result = undefined;
                 }

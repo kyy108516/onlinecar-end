@@ -12,4 +12,7 @@ router.get('/addValidateItem',function (req,res,next) {
 router.post('/query',function (req,res,next) {
     validate.query(req,res,next)
 });
+router.get('/updateState',function (req,res,next) {
+    validate.updatestate(req,res,next)
+});
 module.exports = router;

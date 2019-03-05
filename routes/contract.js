@@ -6,6 +6,9 @@ var contract=require('../handle/contract')
 router.post('/query', function(req, res, next) {
     contract.query(req,res,next);
 });
+router.post('/queryItem', function(req, res, next) {
+    contract.queryitem(req,res,next);
+});
 router.get('/deleteContract',function (req,res,next) {
     contract.delete(req,res,next)
 });
@@ -15,7 +18,7 @@ router.get('/addContract',function (req,res,next) {
 router.get('/addContractItem',function (req,res,next) {
     contract.additem(req,res,next)
 });
-router.get('/updateContract',function (req,res,next) {
-    contract.update(req,res,next)
+router.get('/updateState',function (req,res,next) {
+    contract.updatestate(req,res,next)
 })
 module.exports = router;
