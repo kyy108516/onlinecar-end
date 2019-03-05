@@ -9,4 +9,7 @@ router.get('/addValidate',function (req,res,next) {
 router.get('/addValidateItem',function (req,res,next) {
     validate.additem(req,res,next)
 });
+router.post('/query',function (req,res,next) {
+    validate.query(req,res,next)
+});
 module.exports = router;

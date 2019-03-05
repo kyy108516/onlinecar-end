@@ -21,13 +21,13 @@ var driverData={
                 return
             }
             if (data.name!=''){
-                sql+=" and name="+"'"+data.name+"'"
+                sql+=" and name like"+"'%"+data.name+"%'"
             }
             if(data.sex !=''){
                 sql+=" and sex="+"'"+data.sex+"'"
             }
             if(data.phone!=''){
-                sql+=" and phone="+"'"+data.phone+"'"
+                sql+=" and phone like"+"'%"+data.phone+"%'"
             }
             if(data.state!=''){
                 sql+=" and state="+"'"+data.state+"'"

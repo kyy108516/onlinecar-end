@@ -16,7 +16,7 @@ var contractData={
             var data=req.body
             var sql=contractSQL.query
             if (data.id!=''){
-                sql+=" and a.id="+"'"+data.id+"'"
+                sql+=" and a.id like"+"'%"+data.id+"%'"
             }
             if (data.license!=''){
                 sql+=" and a.car_id="+"'"+data.license+"'"
