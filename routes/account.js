@@ -18,4 +18,10 @@ router.post('/queryDeatil', function(req, res, next) {
 router.get('/addReceivable',function (req,res,next) {
     account.addreceivable(req,res,next)
 });
+router.get('/addPractical',function (req,res,next) {
+    account.addpractical(req,res,next)
+});
+router.get('/updateReceivable',function (req,res,next) {
+    account.updatereceivable(req,res,next)
+});
 module.exports = router;
