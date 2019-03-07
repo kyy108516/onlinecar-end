@@ -30,4 +30,7 @@ router.get('/addDetail',function (req,res,next) {
 router.get('/addBill',function (req,res,next) {
     account.addbill(req,res,next)
 });
+router.get('/updateBill',function (req,res,next) {
+    account.updatebill(req,res,next)
+});
 module.exports = router;

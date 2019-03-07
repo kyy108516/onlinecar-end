@@ -72,18 +72,18 @@ var accountData={
     },
     querybill: function (req, res, next) {
         pool.getConnection(function (err, connection) {
-            // var data=req.body
-            // var sql=maintainanceSQL.query
-            // if (data.id!=0){
-            //     sql+=" and id="+data.id
-            // }else if (data.id==="0"){
-            //     json(res,undefined)
-            //     return
-            // }
-            // if (data.name!=''){
-            //     sql+=" and name="+"'"+data.name+"'"
-            // }
-            connection.query(accountSQL.querybill, function (err, result) {
+            var data=req.body
+            var sql=accountSQL.querybill
+            if (data.id!=''){
+                sql+=" and id like"+"'%"+data.id+"%'"
+            }
+            if (data.state!=''){
+                sql+=" and state="+"'"+data.state+"'"
+            }
+            if (data.type!=''){
+                sql+=" and type="+"'"+data.type+"'"
+            }
+            connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;
                     result = {
@@ -206,6 +206,24 @@ var accountData={
             connection.query(accountSQL.addbill, [param.id,param.type,param.money], function (err, result) {
                 if (result) {
                     result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    updatebill: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(accountSQL.updatebill, [param.time,param.state,param.id], function (err, result) {
+                if (result.affectedRows>0) {
+                    var _result = result;
+                    result ='update'
                 } else {
                     result = undefined;
                 }

@@ -8,5 +8,6 @@ var AccountSQL = {
     updatereceivable:"update account_receivable set already_money=already_money+?,state=? where id=?",
     adddetail:"insert into account_detail(id,type,state,money,time) values(?,?,?,?,?)",
     addbill:"insert into account_bill(id,type,money,state) values (?,?,?,'未完成')",
+    updatebill:"update account_bill set time=?,state=? where id=?",
 };
 module.exports = AccountSQL;
