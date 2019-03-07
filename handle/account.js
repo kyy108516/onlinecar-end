@@ -182,6 +182,40 @@ var accountData={
             connection.release();
         })
     },
+    adddetail: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(accountSQL.adddetail, [param.id,param.type,param.state,param.money,param.time], function (err, result) {
+                if (result) {
+                    result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    addbill: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(accountSQL.addbill, [param.id,param.type,param.money], function (err, result) {
+                if (result) {
+                    result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
 }
 
 module.exports=accountData

@@ -6,5 +6,7 @@ var AccountSQL = {
     addreceivable:"insert into account_receivable(id,contract_id,money,time,state,type,already_money) values (?,?,?,?,'未完成',?,0)",
     addpractical:"insert into account_practical(id,receivable_id,money,time,type) values (?,?,?,?,?)",
     updatereceivable:"update account_receivable set already_money=already_money+?,state=? where id=?",
+    adddetail:"insert into account_detail(id,type,state,money,time) values(?,?,?,?,?)",
+    addbill:"insert into account_bill(id,type,money,state) values (?,?,?,'未完成')",
 };
 module.exports = AccountSQL;

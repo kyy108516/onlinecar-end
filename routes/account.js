@@ -24,4 +24,10 @@ router.get('/addPractical',function (req,res,next) {
 router.get('/updateReceivable',function (req,res,next) {
     account.updatereceivable(req,res,next)
 });
+router.get('/addDetail',function (req,res,next) {
+    account.adddetail(req,res,next)
+});
+router.get('/addBill',function (req,res,next) {
+    account.addbill(req,res,next)
+});
 module.exports = router;
