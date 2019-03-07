@@ -42,4 +42,10 @@ router.get('/addPartner',function (req,res,next) {
 router.get('/updatePartner',function (req,res,next) {
     car.updatepartner(req,res,next)
 });
+router.get('/updateViolation',function (req,res,next) {
+    car.updateviolation(req,res,next)
+});
+router.get('/addViolation',function (req,res,next) {
+    car.addviolation(req,res,next)
+});
 module.exports = router;

@@ -281,32 +281,58 @@ var carData={
         pool.getConnection(function (err, connection) {
             //建立连接 得到车辆表
             var data=req.body
-            // var sql=carSQL.queryviolation
-            // if (data.id!=0){
-            //     sql+=" and a.id="+data.id
-            // }else if (data.id==="0"){
-            //     json(res,undefined)
-            //     return
-            // }
-            // if (data.license!=''){
-            //     sql+=" and license="+"'"+data.license+"'"
-            // }
-            // if(data.vin !=''){
-            //     sql+=" and vin="+"'"+data.vin+"'"
-            // }
-            // if(data.model!=''){
-            //     sql+=" and model="+"'"+data.model+"'"
-            // }
-            // if(data.state!=''){
-            //     sql+=" and state="+"'"+data.state+"'"
-            // }
-            connection.query(carSQL.queryviolation, function (err, result) {
+            var sql=carSQL.queryviolation
+            if (data.license!=''){
+                sql+=" and a.car_id="+"'"+data.license+"'"
+            }
+            if(data.name !=''){
+                sql+=" and a.driver_id="+"'"+data.name+"'"
+            }
+            if(data.state!=''){
+                sql+=" and a.state="+"'"+data.state+"'"
+            }
+            connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;
                     result = {
                         result: 'select',
                         data: _result
                     }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    updateviolation: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(carSQL.updateviolation, [param.id], function (err, result) {
+                if (result.affectedRows>0) {
+                    var _result = result;
+                    result ='update'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    addviolation: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(carSQL.addviolation, [param.car_id,param.happen_site,param.happen_time,param.money,param.score,param.driver_id,param.contract_id], function (err, result) {
+                if (result) {
+                    result = 'add'
                 } else {
                     result = undefined;
                 }
