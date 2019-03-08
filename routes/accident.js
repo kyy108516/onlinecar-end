@@ -6,7 +6,10 @@ var accident=require('../handle/accident')
 router.post('/query', function(req, res, next) {
     accident.query(req,res,next);
 });
-// router.get('/addMaintainance',function (req,res,next) {
-//     accident.add(req,res,next)
-// });
+router.get('/add',function (req,res,next) {
+    accident.add(req,res,next)
+});
+router.get('/addItem',function (req,res,next) {
+    accident.additem(req,res,next)
+});
 module.exports = router;
