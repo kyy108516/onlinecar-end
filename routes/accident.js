@@ -12,4 +12,7 @@ router.get('/add',function (req,res,next) {
 router.get('/addItem',function (req,res,next) {
     accident.additem(req,res,next)
 });
+router.get('/update',function (req,res,next) {
+    accident.update(req,res,next)
+});
 module.exports = router;

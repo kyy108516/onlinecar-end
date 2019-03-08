@@ -5,5 +5,6 @@ var ContractSQL = {
     additem:"insert into contract_item(id,type,period,money,time) values(?,?,?,?,?)",
     updatestate:"update contract_list set state=? where id=?",
     queryitem:"SELECT a.* from contract_item as a,contract_list as b where a.id=b.id",
+    queryexpire:"select * from contract_list where TO_DAYS(end_time)-TO_DAYS(NOW())<=7"
 };
 module.exports = ContractSQL;

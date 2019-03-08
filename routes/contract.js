@@ -20,5 +20,8 @@ router.get('/addContractItem',function (req,res,next) {
 });
 router.get('/updateState',function (req,res,next) {
     contract.updatestate(req,res,next)
-})
+});
+router.post('/queryExpire', function(req, res, next) {
+    contract.queryexpire(req,res,next);
+});
 module.exports = router;
