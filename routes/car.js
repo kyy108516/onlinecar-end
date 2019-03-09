@@ -48,4 +48,10 @@ router.get('/updateViolation',function (req,res,next) {
 router.get('/addViolation',function (req,res,next) {
     car.addviolation(req,res,next)
 });
+router.post('/queryInsuranceRemind',function (req,res,next) {
+    car.queryinsuranceremind(req,res,next)
+});
+router.get('/updateInsurance',function (req,res,next) {
+    car.updateinsurance(req,res,next)
+});
 module.exports = router;

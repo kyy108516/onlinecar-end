@@ -8,11 +8,13 @@ var CarSQL = {
     querypartner: "select * from sys_partner where type=?",
     queryinsurance:"select a.*,b.company_name from car_insurance as a,sys_partner as b where a.partner_id=b.id and car_id=?",
     addinsurance:"insert into car_insurance(id,type,partner_id,car_id,start_time,end_time,money) values(?,?,?,?,?,?,?)",
+    updateinsurance:"update car_insurance set id=?,partner_id=?,start_time=?,end_time=?,money=? where id=?",
     deletepartner:"delete from sys_partner where id=?",
     addpartner:"insert into sys_partner(company_name,type) values(?,?)",
     updatepartner:"update sys_partner set company_name=?,type=? where id=?",
     queryviolation:"select a.*,b.license,c.name from car_violation as a,car_list as b,driver_list as c where a.car_id=b.id and a.driver_id=c.id",
     updateviolation:"update car_violation set state='是' where id=?",
     addviolation:"insert into car_violation(car_id,happen_site,happen_time,money,score,state,driver_id,contract_id) values(?,?,?,?,?,'否',?,?)",
+    queryinsuranceremind:"select a.*,b.license,c.company_name from car_insurance as a,car_list as b,sys_partner as c where a.partner_id=c.id and a.car_id=b.id and TO_DAYS(end_time)-TO_DAYS(NOW())<=7",
 };
 module.exports = CarSQL;
