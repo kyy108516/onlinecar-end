@@ -203,6 +203,9 @@ var carData={
             if(data.type!=''){
                 sql+=" and type="+"'"+data.type+"'"
             }
+            if(data.state!=''){
+                sql+=" and state="+"'"+data.state+"'"
+            }
             console.log(sql)
             connection.query(sql, function (err, result) {
                 if (result != '') {
@@ -238,18 +241,19 @@ var carData={
             connection.release();
         })
     },
-    deletepartner:function (req,res,next) {
-        pool.getConnection(function (err,connection) {
+    deletepartner: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
-            var param=req.query||req.params;
-            connection.query(carSQL.deletepartner,param.id,function(err, result) {
-                if(result.affectedRows>0) {//mysql执行影响的行数大于0
-                    result='delete'
-                }else{
-                    result=undefined;
+            var param = req.query || req.params;
+            connection.query(carSQL.deletepartner, [param.id], function (err, result) {
+                if (result.affectedRows>0) {
+                    var _result = result;
+                    result ='update'
+                } else {
+                    result = undefined;
                 }
                 // 以json形式，把操作结果返回给前台页面
-                json(res,result);
+                json(res, result);
             });
             // 释放连接
             connection.release();

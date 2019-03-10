@@ -6,6 +6,9 @@ var contract=require('../handle/contract')
 router.post('/query', function(req, res, next) {
     contract.query(req,res,next);
 });
+router.post('/queryExpire', function(req, res, next) {
+    contract.queryexpire(req,res,next);
+});
 router.post('/queryItem', function(req, res, next) {
     contract.queryitem(req,res,next);
 });

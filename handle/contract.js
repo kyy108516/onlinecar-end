@@ -48,6 +48,44 @@ var contractData={
             connection.release();
         })
     },
+    queryexpire: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //建立连接 得到合同表
+            // var data=req.body
+            var sql=contractSQL.query
+            // if (data.id!=''){
+            //     sql+=" and a.id like"+"'%"+data.id+"%'"
+            // }
+            // if (data.license!=''){
+            //     sql+=" and a.car_id="+"'"+data.license+"'"
+            // }
+            // if(data.type !=''){
+            //     sql+=" and a.type="+"'"+data.type+"'"
+            // }
+            // if(data.name!=''){
+            //     sql+=" and a.driver_id="+"'"+data.name+"'"
+            // }
+            // if(data.state!=''){
+            //     sql+=" and a.state="+"'"+data.state+"'"
+            // }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
     delete:function (req,res,next) {
         pool.getConnection(function (err,connection) {
             //获取前台页面传过来的参数
