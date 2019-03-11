@@ -3,5 +3,6 @@ var AccidentSQL = {
     add:"insert into contract_accident(id,contract_id,happen_site,happen_time,money,state,car_id,driver_id) values(?,?,?,?,?,'待结案',?,?)",
     additem:"insert into contract_accident_item(id,type,money) values(?,?,?)",
     update:"update contract_accident set state=? where id=?",
+    queryitem:"SELECT a.* from contract_accident_item as a,contract_accident as b where a.id=b.id",
 };
 module.exports = AccidentSQL;

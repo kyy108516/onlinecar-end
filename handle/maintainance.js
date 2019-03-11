@@ -21,7 +21,7 @@ var maintainanceData = {
                 return
             }
             if (data.license != '') {
-                sql += " and c.id=" + "'" + data.license + "'"
+                sql += " and b.id=" + "'" + data.license + "'"
             }
             if (data.state != '') {
                 sql += " and a.state=" + "'" + data.state + "'"

@@ -27,4 +27,19 @@ router.get('/updateState',function (req,res,next) {
 router.post('/queryExpire', function(req, res, next) {
     contract.queryexpire(req,res,next);
 });
+router.post('/queryDetain', function(req, res, next) {
+    contract.querydetain(req,res,next);
+});
+router.get('/updateDetain',function (req,res,next) {
+    contract.updatedetain(req,res,next)
+});
+router.get('/addDetain',function (req,res,next) {
+    contract.adddetain(req,res,next)
+});
+router.get('/DetainAccident',function (req,res,next) {
+    contract.detainaccident(req,res,next)
+});
+router.get('/DetainViolation',function (req,res,next) {
+    contract.detainviolation(req,res,next)
+});
 module.exports = router;

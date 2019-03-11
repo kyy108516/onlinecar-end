@@ -313,6 +313,9 @@ var carData={
             if(data.state!=''){
                 sql+=" and a.state="+"'"+data.state+"'"
             }
+            if(data.contract!=''){
+                sql+=" and a.contract_id="+"'"+data.contract+"'"
+            }
             connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;

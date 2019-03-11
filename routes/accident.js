@@ -15,4 +15,7 @@ router.get('/addItem',function (req,res,next) {
 router.get('/update',function (req,res,next) {
     accident.update(req,res,next)
 });
+router.post('/queryItem', function(req, res, next) {
+    accident.queryitem(req,res,next);
+});
 module.exports = router;
