@@ -6,6 +6,9 @@ var contract=require('../handle/contract')
 router.post('/query', function(req, res, next) {
     contract.query(req,res,next);
 });
+router.post('/querySettle', function(req, res, next) {
+    contract.querysettle(req,res,next);
+});
 router.post('/queryExpire', function(req, res, next) {
     contract.queryexpire(req,res,next);
 });
