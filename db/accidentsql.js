@@ -4,5 +4,7 @@ var AccidentSQL = {
     additem:"insert into contract_accident_item(id,type,money) values(?,?,?)",
     update:"update contract_accident set state=? where id=?",
     queryitem:"SELECT a.* from contract_accident_item as a,contract_accident as b where a.id=b.id",
+    queryreparation:"select a.* from contract_accident_reparation as a,contract_accident as b where a.id=b.id",
+    addreparation:"insert into contract_accident_reparation(id,money,time) values(?,?,?)",
 };
 module.exports = AccidentSQL;

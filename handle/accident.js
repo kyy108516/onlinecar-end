@@ -128,6 +128,47 @@ var accidentData={
             connection.release();
         })
     },
+    queryreparation: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            var data=req.body
+            var sql=accidentSQL.queryreparation
+            if(data.id!=''){
+                sql+=" and a.id="+"'"+data.id+"'"
+            }
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    addreparation: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(accidentSQL.addreparation, [param.id,param.money,param.time], function (err, result) {
+                if (result) {
+                    result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
 }
 
 module.exports=accidentData

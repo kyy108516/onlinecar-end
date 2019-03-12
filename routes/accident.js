@@ -12,10 +12,16 @@ router.get('/add',function (req,res,next) {
 router.get('/addItem',function (req,res,next) {
     accident.additem(req,res,next)
 });
+router.get('/addReparation',function (req,res,next) {
+    accident.addreparation(req,res,next)
+});
 router.get('/update',function (req,res,next) {
     accident.update(req,res,next)
 });
 router.post('/queryItem', function(req, res, next) {
     accident.queryitem(req,res,next);
+});
+router.post('/queryReparation', function(req, res, next) {
+    accident.queryreparation(req,res,next);
 });
 module.exports = router;
