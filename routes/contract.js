@@ -36,6 +36,9 @@ router.post('/queryDetain', function(req, res, next) {
 router.get('/updateDetain',function (req,res,next) {
     contract.updatedetain(req,res,next)
 });
+router.get('/updateSettle',function (req,res,next) {
+    contract.updatesettle(req,res,next)
+});
 router.get('/addDetain',function (req,res,next) {
     contract.adddetain(req,res,next)
 });

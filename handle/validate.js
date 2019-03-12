@@ -57,6 +57,9 @@ var validateData={
             if (data.state!=''){
                 sql+=" and a.state="+"'"+data.state+"'"
             }
+            if (data.type!=''){
+                sql+=" and a.type="+"'"+data.type+"'"
+            }
             console.log(sql)
             connection.query(sql, function (err, result) {
                 if (result != '') {
