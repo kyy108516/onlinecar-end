@@ -15,5 +15,6 @@ var ContractSQL = {
     updatesettle:"update contract_list set validatecheck=? where id=?",
     addsettleitem:"insert into contract_settle_item(id,type,money) values(?,?,?)",
     updatesettlefinance:"update contract_list set financecheck=?,finance_money=? where id=?",
+    querysettleitem:"select * from contract_settle_item where 1=1",
 };
 module.exports = ContractSQL;

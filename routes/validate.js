@@ -15,4 +15,7 @@ router.post('/query',function (req,res,next) {
 router.get('/updateState',function (req,res,next) {
     validate.updatestate(req,res,next)
 });
+router.post('/queryItem',function (req,res,next) {
+    validate.queryitem(req,res,next)
+});
 module.exports = router;

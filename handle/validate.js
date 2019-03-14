@@ -99,6 +99,31 @@ var validateData={
             connection.release();
         })
     },
+    queryitem: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            var data=req.body
+            var sql=validateSQL.queryitem
+            if (data.contract_id!=''){
+                sql+=" and b.contract_id="+"'"+data.contract_id+"'"
+            }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
 }
 
 module.exports=validateData

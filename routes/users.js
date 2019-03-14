@@ -4,6 +4,7 @@ var router = express.Router();
 var mysql=require('mysql');
 var dbConfig=require('../db/DBConfig');
 var userSQL=require('../db/usersql');
+var user=require('../handle/user')
 // 使用DBConfig.js的配置信息创建一个MySQL连接池
 var pool=mysql.createPool(dbConfig.mysql);
 //响应json数据
@@ -83,6 +84,12 @@ router.get('/getUser', function(req, res, next) {
    })
       connection.release();
   })
+});
+router.post('/queryFunction',function (req,res,next) {
+    user.queryfunction(req,res,next)
+});
+router.get('/updateFunction',function (req,res,next) {
+    user.updatefunction(req,res,next)
 });
 
 module.exports = router;
