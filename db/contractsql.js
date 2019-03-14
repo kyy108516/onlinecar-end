@@ -13,5 +13,7 @@ var ContractSQL = {
     detainviolation:"update contract_detain set violation=violation+1 where contract_id=?",
     querysettle:"select a.*,b.license,b.vin,e.contract_id,c.`name`,c.phone,d.model,e.id from contract_list as a,car_list as b,driver_list as c,car_type as d,contract_validate as e where a.car_id=b.id and a.driver_id=c.id and b.cartype=d.id and a.state='结算中' and a.id=e.contract_id and e.type='还车'",
     updatesettle:"update contract_list set validatecheck=? where id=?",
+    addsettleitem:"insert into contract_settle_item(id,type,money) values(?,?,?)",
+    updatesettlefinance:"update contract_list set financecheck=?,finance_money=? where id=?",
 };
 module.exports = ContractSQL;

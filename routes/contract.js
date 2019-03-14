@@ -39,6 +39,9 @@ router.get('/updateDetain',function (req,res,next) {
 router.get('/updateSettle',function (req,res,next) {
     contract.updatesettle(req,res,next)
 });
+router.get('/updateSettleFinance',function (req,res,next) {
+    contract.updatesettlefinance(req,res,next)
+});
 router.get('/addDetain',function (req,res,next) {
     contract.adddetain(req,res,next)
 });
@@ -47,5 +50,8 @@ router.get('/DetainAccident',function (req,res,next) {
 });
 router.get('/DetainViolation',function (req,res,next) {
     contract.detainviolation(req,res,next)
+});
+router.get('/addSettleItem',function (req,res,next) {
+    contract.addsettleitem(req,res,next)
 });
 module.exports = router;

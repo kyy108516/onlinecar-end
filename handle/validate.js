@@ -60,6 +60,9 @@ var validateData={
             if (data.type!=''){
                 sql+=" and a.type="+"'"+data.type+"'"
             }
+            if (data.contract_id!=''){
+                sql+=" and a.contract_id="+"'"+data.contract_id+"'"
+            }
             console.log(sql)
             connection.query(sql, function (err, result) {
                 if (result != '') {
@@ -82,7 +85,7 @@ var validateData={
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的参数
             var param = req.query || req.params;
-            connection.query(validateSQL.updatestate, [param.state,param.id], function (err, result) {
+            connection.query(validateSQL.updatestate, [param.state,param.money,param.id], function (err, result) {
                 if (result.affectedRows>0) {
                     var _result = result;
                     result ='update'
