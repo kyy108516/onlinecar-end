@@ -15,6 +15,6 @@ var CarSQL = {
     queryviolation:"select a.*,b.license,c.name from car_violation as a,car_list as b,driver_list as c where a.car_id=b.id and a.driver_id=c.id",
     updateviolation:"update car_violation set state='是' where id=?",
     addviolation:"insert into car_violation(car_id,happen_site,happen_time,money,score,state,driver_id,contract_id) values(?,?,?,?,?,'否',?,?)",
-    queryinsuranceremind:"select a.*,b.license,c.company_name from car_insurance as a,car_list as b,sys_partner as c where a.partner_id=c.id and a.car_id=b.id and TO_DAYS(end_time)-TO_DAYS(NOW())<=7",
+    queryinsuranceremind:"select a.*,b.license,c.company_name from car_insurance as a,car_list as b,sys_partner as c where a.partner_id=c.id and a.car_id=b.id and",
 };
 module.exports = CarSQL;

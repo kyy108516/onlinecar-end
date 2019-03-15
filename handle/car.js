@@ -371,11 +371,11 @@ var carData={
     queryinsuranceremind: function (req, res, next) {
         pool.getConnection(function (err, connection) {
             //建立连接 得到车辆表
-            // var data=req.body
+            var data=req.body
             var sql=carSQL.queryinsuranceremind
-            // if (data.license!=''){
-            //     sql+=" and a.car_id="+"'"+data.license+"'"
-            // }
+            if (data.day!=''){
+                sql+="  TO_DAYS(end_time)-TO_DAYS(NOW())<="+data.day
+            }
             // if(data.name !=''){
             //     sql+=" and a.driver_id="+"'"+data.name+"'"
             // }

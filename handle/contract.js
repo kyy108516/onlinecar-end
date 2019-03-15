@@ -226,11 +226,11 @@ var contractData={
     queryexpire: function (req, res, next) {
         pool.getConnection(function (err, connection) {
             //建立连接 得到合同表
-            // var data=req.body
+            var data=req.body
             var sql=contractSQL.queryexpire
-            // if (data.id!=''){
-            //     sql+=" and a.id like"+"'%"+data.id+"%'"
-            // }
+            if (data.day!=''){
+                sql+="  and TO_DAYS(end_time)-TO_DAYS(NOW())<="+data.day
+            }
             // if (data.license!=''){
             //     sql+=" and a.car_id="+"'"+data.license+"'"
             // }
@@ -274,6 +274,9 @@ var contractData={
             }
             if(data.state!=''){
                 sql+=" and a.state="+"'"+data.state+"'"
+            }
+            if(data.vio!=''&&data.acc!=''){
+                sql+="  and (a.violation>="+data.vio+" or a.accident>="+data.acc+")"
             }
             console.log(sql)
             connection.query(sql, function (err, result) {
