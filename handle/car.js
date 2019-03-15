@@ -22,10 +22,10 @@ var carData={
                 return
             }
             if (data.license!=''){
-                sql+=" and license="+"'"+data.license+"'"
+                sql+=" and license like"+"'%"+data.license+"%'"
             }
             if(data.vin !=''){
-                sql+=" and vin="+"'"+data.vin+"'"
+                sql+=" and vin like"+"'%"+data.vin+"%'"
             }
             if(data.model!=''){
                 sql+=" and model="+"'"+data.model+"'"
@@ -198,7 +198,7 @@ var carData={
                 return
             }
             if (data.company_name!=''){
-                sql+=" and company_name="+"'"+data.company_name+"'"
+                sql+=" and company_name like"+"'%"+data.company_name+"%'"
             }
             if(data.type!=''){
                 sql+=" and type="+"'"+data.type+"'"
