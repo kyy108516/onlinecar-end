@@ -21,6 +21,9 @@ router.get('/addCar',function (req,res,next) {
 router.get('/updateCar',function (req,res,next) {
     car.update(req,res,next)
 });
+router.get('/finishContract',function (req,res,next) {
+    car.finishcontract(req,res,next)
+});
 router.get('/updateState',function (req,res,next) {
     car.updatestate(req,res,next)
 });

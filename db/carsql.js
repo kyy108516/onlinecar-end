@@ -4,6 +4,7 @@ var CarSQL = {
     add:"insert into car_list(license,vin,cartype,state) values(?,?,?,'库存')",
     update:"update car_list set license=?,vin=?,cartype=? where id=?",
     updatestate:"update car_list set state=? where id=?",
+    finishcontract:"update car_list set state='库存' where license=?",
     partner:"select * from sys_partner where 1=1",
     querypartner: "select * from sys_partner where type=? and state='激活'",
     queryinsurance:"select a.*,b.company_name from car_insurance as a,sys_partner as b where a.partner_id=b.id and car_id=?",
