@@ -1,9 +1,7 @@
 var UserSQL = {
-    insert:'INSERT INTO user(username,password) VALUES(?,?)',
-    queryAll:'SELECT * FROM user',
-    select_id:'SELECT * FROM user WHERE username = ?',
-    select_password:"SELECT * from user WHERE password=?",
+    query:"select * from sys_user as a,sys_role as b where a.role_id=b.id",
     queryfunction:"select * from sys_function",
     updatefunction:"update sys_function set insurance=?,contract=?,violation=?,accident=? where id=1",
+    queryrole:"select * from sys_role where 1=1",
 };
 module.exports = UserSQL;
