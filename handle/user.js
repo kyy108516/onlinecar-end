@@ -29,7 +29,19 @@ var userData={
     // },
     query: function (req, res, next) {
         pool.getConnection(function (err, connection) {
-            connection.query(userSQL.query, function (err, result) {
+            var data=req.body
+            var sql=userSQL.query
+            if (data.username!=''){
+                sql+=" and a.username like"+"'%"+data.username+"%'"
+            }
+            if (data.name!=''){
+                sql+=" and b.id like"+"'%"+data.name+"%'"
+            }
+            if (data.type!=''){
+                sql+=" and a.type ="+"'"+data.type+"'"
+            }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;
                     result = {
@@ -48,7 +60,19 @@ var userData={
     },
     queryrole: function (req, res, next) {
         pool.getConnection(function (err, connection) {
-            connection.query(userSQL.queryrole, function (err, result) {
+            var data=req.body
+            var sql=userSQL.queryrole
+            if (data.id!=''){
+                sql+=" and id like"+"'%"+data.id+"%'"
+            }
+            if (data.name!=''){
+                sql+=" and name like"+"'%"+data.name+"%'"
+            }
+            if (data.state!=''){
+                sql+=" and state ="+"'"+data.state+"'"
+            }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;
                     result = {
