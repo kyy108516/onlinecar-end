@@ -10,23 +10,23 @@ var userSQL=require('../db/usersql');
 var json = require('../json/car');
 
 var userData={
-    // add: function (req, res, next) {
-    //     pool.getConnection(function (err, connection) {
-    //         //获取前台页面传过来的参数
-    //         var param = req.query || req.params;
-    //         connection.query(validateSQL.add, [param.contract_id,param.time,param.type], function (err, result) {
-    //             if (result) {
-    //                 result = 'add'
-    //             } else {
-    //                 result = undefined;
-    //             }
-    //             // 以json形式，把操作结果返回给前台页面
-    //             json(res, result);
-    //         });
-    //         // 释放连接
-    //         connection.release();
-    //     })
-    // },
+    adduser: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(userSQL.adduser, [param.username,param.password,param.role_id], function (err, result) {
+                if (result) {
+                    result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
     query: function (req, res, next) {
         pool.getConnection(function (err, connection) {
             var data=req.body
@@ -126,31 +126,65 @@ var userData={
             connection.release();
         })
     },
-    // queryitem: function (req, res, next) {
-    //     pool.getConnection(function (err, connection) {
-    //         var data=req.body
-    //         var sql=validateSQL.queryitem
-    //         if (data.contract_id!=''){
-    //             sql+=" and b.contract_id="+"'"+data.contract_id+"'"
-    //         }
-    //         console.log(sql)
-    //         connection.query(sql, function (err, result) {
-    //             if (result != '') {
-    //                 var _result = result;
-    //                 result = {
-    //                     result: 'select',
-    //                     data: _result
-    //                 }
-    //             } else {
-    //                 result = undefined;
-    //             }
-    //             // 以json形式，把操作结果返回给前台页面
-    //             json(res, result);
-    //         });
-    //         // 释放连接
-    //         connection.release();
-    //     })
-    // },
+    updateuser: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(userSQL.updateuser, [param.password,param.role_id,param.username], function (err, result) {
+                if (result.affectedRows > 0) {
+                    var _result = result;
+                    result = 'update'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    deleteuser:function (req,res,next) {
+        pool.getConnection(function (err,connection) {
+            //获取前台页面传过来的参数
+            var param=req.query||req.params;
+            connection.query(userSQL.deleteuser,param.username,function(err, result) {
+                if(result.affectedRows>0) {//mysql执行影响的行数大于0
+                    result='delete'
+                }else{
+                    result=undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res,result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    queryrolemenu: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            var data=req.body
+            var sql=userSQL.queryrolemenu
+            if (data.username!=''){
+                sql+=" and d.username ="+"'"+data.username+"'"
+            }
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
 }
 
 module.exports=userData
