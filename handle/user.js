@@ -27,6 +27,40 @@ var userData={
             connection.release();
         })
     },
+    addrole: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(userSQL.addrole, [param.id,param.name,param.description], function (err, result) {
+                if (result) {
+                    result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    addrolemenu: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(userSQL.addrolemenu, [param.role_id,param.menu_id], function (err, result) {
+                if (result) {
+                    result = 'add'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
     query: function (req, res, next) {
         pool.getConnection(function (err, connection) {
             var data=req.body

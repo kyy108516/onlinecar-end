@@ -7,5 +7,7 @@ var UserSQL = {
     updateuser:"update sys_user set password=?,role_id=? where username=?",
     deleteuser:"delete from sys_user where username=?",
     queryrolemenu:"select b.* from sys_role as a,sys_menu as b,sys_role_menu as c,sys_user as d where c.role_id=a.id and b.id=c.menu_id and d.role_id=a.id",
+    addrole:"insert into sys_role(id,name,description,state) values(?,?,?,'激活')",
+    addrolemenu:"insert into sys_role_menu(role_id,menu_id) values(?,?)",
 };
 module.exports = UserSQL;

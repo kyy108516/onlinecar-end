@@ -21,6 +21,12 @@ router.get('/updateUser',function (req,res,next) {
 router.get('/addUser',function (req,res,next) {
     user.adduser(req,res,next)
 });
+router.get('/addRole',function (req,res,next) {
+    user.addrole(req,res,next)
+});
+router.get('/addRoleMenu',function (req,res,next) {
+    user.addrolemenu(req,res,next)
+});
 router.get('/deleteUser',function (req,res,next) {
     user.deleteuser(req,res,next)
 });
