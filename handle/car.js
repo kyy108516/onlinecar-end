@@ -51,6 +51,35 @@ var carData={
             connection.release();
         })
     },
+    carexist: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //建立连接 得到车辆表
+            var data=req.body
+            var sql=carSQL.carexist
+            if (data.license!=''){
+                sql+=" and (license ="+"'"+data.license+"'"
+            }
+            if(data.vin !=''){
+                sql+=" or vin ="+"'"+data.vin+"')"
+            }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
     delete:function (req,res,next) {
         pool.getConnection(function (err,connection) {
             //获取前台页面传过来的参数

@@ -6,6 +6,9 @@ var car=require('../handle/car')
 router.post('/query', function(req, res, next) {
     car.query(req,res,next);
 });
+router.post('/carExist', function(req, res, next) {
+    car.carexist(req,res,next);
+});
 router.post('/queryViolation', function(req, res, next) {
     car.queryviolation(req,res,next);
 });
