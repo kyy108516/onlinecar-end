@@ -6,6 +6,9 @@ var driver=require('../handle/driver')
 router.post('/query', function(req, res, next) {
     driver.query(req,res,next);
 });
+router.post('/driverExist', function(req, res, next) {
+    driver.driverexist(req,res,next);
+});
 router.get('/deleteDriver',function (req,res,next) {
     driver.delete(req,res,next)
 });

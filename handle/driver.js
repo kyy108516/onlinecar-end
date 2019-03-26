@@ -50,6 +50,37 @@ var driverData={
             connection.release();
         })
     },
+    driverexist: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            var data=req.body
+            var sql=driverSQL.driverexist
+            if (data.id!=0){
+                sql+=" and id !="+data.id
+            }else if (data.id==="0"){
+                json(res,undefined)
+                return
+            }
+            if(data.phone!=''){
+                sql+=" and phone like"+"'%"+data.phone+"%'"
+            }
+            console.log(sql)
+            connection.query(sql, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
     delete:function (req,res,next) {
         pool.getConnection(function (err,connection) {
             //获取前台页面传过来的参数
