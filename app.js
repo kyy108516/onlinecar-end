@@ -14,6 +14,7 @@ var validateRoute=require('./routes/validate')
 var maintainanceRoute=require('./routes/maintainance')
 var accidentRoute=require('./routes/accident')
 var accountRoute=require('./routes/account')
+var homeRoute=require('./routes/home')
 
 var app = express();
 
@@ -50,6 +51,7 @@ app.use('/validate',validateRoute);
 app.use('/maintainance',maintainanceRoute);
 app.use('/accident',accidentRoute);
 app.use('/account',accountRoute);
+app.use('/home',homeRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
