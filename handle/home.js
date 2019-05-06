@@ -124,6 +124,82 @@ var homeData={
             connection.release();
         })
     },
+    zsr: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            connection.query(homeSQL.zsr, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    zzc: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            connection.query(homeSQL.zzc, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    zc: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            connection.query(homeSQL.zc, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
+    sr: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            connection.query(homeSQL.sr, function (err, result) {
+                if (result != '') {
+                    var _result = result;
+                    result = {
+                        result: 'select',
+                        data: _result
+                    }
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
 }
 
 module.exports=homeData
