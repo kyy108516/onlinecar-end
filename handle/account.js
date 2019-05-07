@@ -23,6 +23,9 @@ var accountData={
             if (data.contract_id!=''){
                 sql+=" and contract_id like"+"'%"+data.contract_id+"%'"
             }
+            if (data.state!=''){
+                sql+=" and b.state!="+ data.state
+            }
             connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;

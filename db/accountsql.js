@@ -1,5 +1,5 @@
 var AccountSQL = {
-    queryreceivable:"select a.* from account_receivable as a,contract_list as b WHERE a.contract_id=b.id and b.state!='已完成'",
+    queryreceivable:"select a.* from account_receivable as a,contract_list as b WHERE a.contract_id=b.id",
     querypractical:"select * from account_practical where 1=1",
     querybill:"select * from account_bill where 1=1",
     querydetail:"select * from account_detail where 1=1",
