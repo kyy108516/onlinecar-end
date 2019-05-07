@@ -24,8 +24,9 @@ var accountData={
                 sql+=" and contract_id like"+"'%"+data.contract_id+"%'"
             }
             if (data.state!=''){
-                sql+=" and b.state!="+ data.state
+                sql+=" and b.state!='"+ data.state+"'"
             }
+            sql+=" ORDER BY state DESC,time"
             connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;
@@ -86,6 +87,7 @@ var accountData={
             if (data.type!=''){
                 sql+=" and type="+"'"+data.type+"'"
             }
+            sql+=" order by state desc,time desc"
             connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;

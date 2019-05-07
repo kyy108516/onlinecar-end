@@ -106,11 +106,11 @@ var accidentData={
     },
     queryitem: function (req, res, next) {
         pool.getConnection(function (err, connection) {
-            // var data=req.body
+            var data=req.body
             var sql=accidentSQL.queryitem
-            // if(data.contract!=''){
-            //     sql+=" and a.contract_id="+"'"+data.contract+"'"
-            // }
+            if(data.id!=''){
+                sql+=" and a.id="+"'"+data.id+"'"
+            }
             connection.query(sql, function (err, result) {
                 if (result != '') {
                     var _result = result;

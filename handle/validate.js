@@ -99,6 +99,24 @@ var validateData={
             connection.release();
         })
     },
+    update: function (req, res, next) {
+        pool.getConnection(function (err, connection) {
+            //获取前台页面传过来的参数
+            var param = req.query || req.params;
+            connection.query(validateSQL.update, [param.state,param.id], function (err, result) {
+                if (result.affectedRows>0) {
+                    var _result = result;
+                    result ='update'
+                } else {
+                    result = undefined;
+                }
+                // 以json形式，把操作结果返回给前台页面
+                json(res, result);
+            });
+            // 释放连接
+            connection.release();
+        })
+    },
     queryitem: function (req, res, next) {
         pool.getConnection(function (err, connection) {
             var data=req.body
